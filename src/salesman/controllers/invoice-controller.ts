@@ -139,7 +139,7 @@ export const getInvoiceById = async (req:Request, res: Response)=>{
 // get invoice by customer name
 export const getInvoiceByName = async(req:Request,res:Response)=>{
     try {
-        const {name} = req.query
+        const {name} = req.params
         if(!name){
             return res.status(400).json({success:false, message:"Customer name is required"})
         }
@@ -160,7 +160,7 @@ export const getInvoiceByName = async(req:Request,res:Response)=>{
 // get invoice by bill number
 export const getInvoiceByBillNo = async(req: Request, res: Response)=>{
     try {
-        const {billNo} = req.query
+        const {billNo} = req.params
         if(!billNo){
             return res.status(404).json({success:false, message:"Bill Number is required "})
         }
@@ -183,7 +183,7 @@ export const getInvoiceByBillNo = async(req: Request, res: Response)=>{
 //get invoice by product name
 export const getInvoiceByProductName = async(req: Request, res: Response)=>{
     try {
-        const {productname} = req.query
+        const {productname} = req.params
         if(!productname){
             return res.status(404).json({success:false, message:"product name is required"})
         }

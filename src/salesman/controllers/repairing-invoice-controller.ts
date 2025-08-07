@@ -10,7 +10,7 @@ import { RepairingInvoice } from "../models/repairing-invoice-model";
 export const createRepairingInvoice = async(req: Request, res:Response)=>{
     try {
         const {customerDetails, paymentDetails, productDetails, invoiceDetails}:IRepairingInvoice = req.body;
-        
+
 
         if(!customerDetails || !paymentDetails || !productDetails || !invoiceDetails){
             return res.status(400).json({success:false, message:"All the fields are required"})
@@ -67,7 +67,7 @@ export const createRepairingInvoice = async(req: Request, res:Response)=>{
         // const upi = paymentDetails?.upi || 0;
 
         
-        const totalPaid = paymentDetails.cash + paymentDetails.upi
+        const totalPaid = paymentDetails.cash ||0 + paymentDetails.upi||0
         
     
         const pendingAmount = totalExpectedAmount - totalPaid;

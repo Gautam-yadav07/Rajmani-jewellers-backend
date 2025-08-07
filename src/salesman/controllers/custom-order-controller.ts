@@ -145,7 +145,7 @@ export const getCustomOrderById = async(req: Request, res: Response)=>{
 }
 export const  getCustomOrderByName = async(req:Request, res: Response)=>{
   try {
-    const {name}= req.query
+    const {name}= req.params
     if(!name){
       return res.status(400).json({success:false, message:"Name is required"})
     }
@@ -166,7 +166,7 @@ export const  getCustomOrderByName = async(req:Request, res: Response)=>{
 }
 export const getCustomeOrderByProductName = async(req: Request, res: Response)=>{
     try {
-        const {productname} = req.query
+        const {productname} = req.params
         if(!productname){
             return res.status(404).json({success:false, message:"product name is required"})
         }

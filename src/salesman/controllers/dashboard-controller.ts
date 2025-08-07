@@ -5,7 +5,7 @@ import { Dashboard } from "../models/dashboard-model";
 
 export const getPaymentSummaryByDate = async (req: Request, res: Response) => {
   try {
-    const { date } = req.query;
+    const { date } = req.params;
 
     if (!date) {
       return res.status(400).json({
