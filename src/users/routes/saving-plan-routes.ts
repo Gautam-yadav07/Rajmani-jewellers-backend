@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/create", createSavingPlan)
 
-router.post("/activate",activatePlan)
+router.post("/activate/:id",activatePlan)
 
 router.get("/active", getActivePlans)
 

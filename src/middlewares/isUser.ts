@@ -5,12 +5,12 @@ export const isUser = (
     res: Response,
     next: NextFunction
 ) => {
-    // if (req.user?.role !== "user") {
-    //     return res.status(403).json({ message: "Forbidden, Only User is allowed" });
-    // }
+    if (req.user?.role !== "user") {
+        return res.status(403).json({ message: "Forbidden, Only User is allowed" });
+    }
     next();
 };
-
+ 
 
 
 

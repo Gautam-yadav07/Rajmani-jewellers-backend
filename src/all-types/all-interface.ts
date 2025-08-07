@@ -117,4 +117,100 @@ export interface ITransaction{
 
 
 
+interface invoiceDetails{ 
+    billNo: string;
+    voucherNo?:string
+    goldRate:number;
+    date: Date;
+    type: "sale"|"purchase";
+  
+}
+interface paymentDetails{
+        cash:number;
+        upi:number;
+        pending?:number;
+        advanceAmount?:number;
+        totalPaid:number
+};
+
+interface customerDetails{
+        customerNameEng:string;
+        customerNameHin?: string;
+        mobileNumber: number;
+        address:string
+
+};
+
+
+export interface IProductDetails{
+        productName: string;
+        remark:string;
+        piece:number;
+        purity: 18| 20 | 22 | 24;
+        grossWeight:number;
+        netWeight:number;
+        lessWeight:number;
+        ratePerGram:number;
+        value:number;
+        stoneRate:number;
+        labourChargesInPer: number;
+        labourChargesInRs: number;
+        finalAmount:number;
+        additionalAmount: number;
+        discountAmount: number;
+
+        weightFrom: number;    //custome order 
+        weightTo:number;
+        width:number;
+        rateCut:boolean;
+        expectedDeliveryDate:Date;
+        description:string
+        expectedAmount:number;
+        workerName:string;
+        metal?:"gold"|"silver";
+        stoneWeight:number;
+        size: number;
+        tagNo: number;
+        
+
+}
+export interface IInvoice{
+    customerDetails:customerDetails;
+    productDetails:IProductDetails[];
+    paymentDetails:paymentDetails;
+    invoiceDetails:invoiceDetails
+}
+
+export interface ICustomOrder{
+    customerDetails:customerDetails;
+    productDetails:IProductDetails[];
+    paymentDetails:paymentDetails;
+    invoiceDetails:invoiceDetails
+}
+export interface IRepairingInvoice{
+    customerDetails:customerDetails;
+    productDetails:IProductDetails[];
+    paymentDetails:paymentDetails;
+    invoiceDetails:invoiceDetails
+}
+
+export interface IDashboard{
+    date:Date;
+    totalSale:{
+        cash:number;
+        upi:number;
+        pending:number
+        total:number
+    },
+
+    totalRepair:{
+        cash:number;
+        upi:number;
+        pending:number
+        total:number
+    }
+}
+
+
+
 

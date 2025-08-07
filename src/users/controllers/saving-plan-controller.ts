@@ -81,18 +81,23 @@ export const createSavingPlan = async (req: AuthenticatedRequest, res: Response)
 
 // pay online logic (ambiquity)
 // Activate plan on first payment
-export const activatePlan = async (req: Request, res: Response) => {
+export const activatePlan = async (req: AuthenticatedRequest, res: Response) => {
+
   try {
-    const { planId, installmentIndex, txnDetails } = req.body;
+    const planId = req.params.id
+    const { installmentIndex, txnDetails } = req.body;
 
     const plan = await SavingPlan.findById(planId);
     if (!plan) return res.status(404).json({ message: 'Plan not found' });
 
 
-     const installment = plan.installments[installmentIndex - 1];
+     const installment = plan.installments[installmentIndex-1];
 
     if (!installment) {
       return res.status(400).json({ success: false, message: 'Invalid installment index' });
+    }
+     if (installment.status === 'paid') {
+      return res.status(400).json({ success: false, message: `Installment ${installmentIndex} is already paid.` });
     }
 
     
@@ -114,11 +119,11 @@ export const activatePlan = async (req: Request, res: Response) => {
 
       // Update the first installment
     if(txnDetails.transactionStatus === "success"){
-    plan.installments[installmentIndex].status = 'paid';
-    plan.installments[installmentIndex].paymentDate = new Date();
-    plan.installments[installmentIndex].transactionDetails = txnDetails;
+    plan.installments[installmentIndex-1].status = 'paid';
+    plan.installments[installmentIndex-1].paymentDate = new Date();
+    plan.installments[installmentIndex-1].transactionDetails = txnDetails;
 
-    plan.totalPaid += plan.installments[installmentIndex].amount;
+    plan.totalPaid += installment.amount;
 
     // Activate if it's the first payment
     if (!plan.planStatus) {
@@ -195,7 +200,7 @@ export const getSavingPlanById = async (req: AuthenticatedRequest, res: Response
     const userId = req.user?.userId
 
     if (!mongoose.Types.ObjectId.isValid(planId)) {
-      return res.status(400).json({ success: false, message: "Invalid Plan ID......" });
+      return res.status(400).json({ success: false, message: "Invalid Plan ID" });
     }
 
     const plan = await SavingPlan.findById({_id: planId, userId}).populate("userId", "userName phoneNumber");
