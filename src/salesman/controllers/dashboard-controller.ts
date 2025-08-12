@@ -63,7 +63,7 @@ export const getPaymentSummaryByDate = async (req: Request, res: Response) => {
       total: repairing.totalCash + repairing.totalUpi + repairing.totalPending,
     };
 
-    // ✅ Upsert dashboard entry for the date
+    //Upsert dashboard entry for the date
     await Dashboard.findOneAndUpdate(
       { date: selectedDate },
       { totalSale, totalRepair },

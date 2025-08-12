@@ -18,7 +18,7 @@ const invoiceSchema  = new mongoose.Schema<IInvoice>({
   invoiceDetails:{
     billNo:{type:String,required:true},
     goldRate:{type:Number,required:true},
-    date: {type: Date,required:true},
+    date: {type: Date,required:true, default:Date.now},
     type:{type:String, enum:["sale", "purchase"]}
   },
   productDetails: [productDetailSchema]

@@ -19,7 +19,7 @@ const customOrderSchema = new mongoose.Schema<ICustomOrder>({
       invoiceDetails:{
         voucherNo:{type:String},
         goldRate:{type:Number},
-        date: {type: Date},
+        date: {type: Date, default:Date.now},
         type:{type:String, enum:["sale", "purchase"]}
       },
       productDetails: [productDetailSchema]

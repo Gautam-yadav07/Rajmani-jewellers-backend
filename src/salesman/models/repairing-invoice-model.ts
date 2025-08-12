@@ -13,7 +13,7 @@ const repairingInvoiceSchema = new mongoose.Schema<IRepairingInvoice>({
     },
     productDetails:[productDetailSchema],
     invoiceDetails:{
-        date:{type:Date}
+        date:{type:Date, default:Date.now}
     },
     paymentDetails:{
         cash:{type:Number},
@@ -22,6 +22,6 @@ const repairingInvoiceSchema = new mongoose.Schema<IRepairingInvoice>({
         totalPaid:{type:Number}
     }
 
-})
+},{timestamps:true})
 export const RepairingInvoice = mongoose.model("RepairingInvoice", repairingInvoiceSchema)
     

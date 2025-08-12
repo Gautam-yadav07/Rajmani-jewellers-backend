@@ -3,11 +3,8 @@ import cors from "cors";
 import { connectDB } from "./db-config";
 import { config } from "dotenv"
 import cookieParser from "cookie-parser"
-import "../utils/due-installments"; // update installment status paid to due
-
-import { checkAndUpdatePlansCron } from "../utils/update-planstatus"; // //update plan status active to past
-checkAndUpdatePlansCron.start();
-
+import { deleteRecordsInTwoDaysCronJob,} from "../salesman/cron-job/cron-job";
+deleteRecordsInTwoDaysCronJob()
 
 config()
 const url = process.env.FRONTEND_URL
